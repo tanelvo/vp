@@ -52,6 +52,12 @@ require("header.php");
 <a href="http://greeny.cs.tlu.ee/~tanevol/vp/kodune3/page3.php">Varasemad mõtted</a>
 <a href="http://greeny.cs.tlu.ee/~tanevol/vp/kodune3/home.php">Kodulehele</a>
 <hr>
+
+
+<ul>
+<li><a href"home
+
+</ul>
 <form method="POST">
   <label> Sisesta oma tänane mõttetu mõte:</label>
   <input type ="text" name="nonsens" placeholder="Mõttekoht">

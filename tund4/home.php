@@ -67,8 +67,12 @@ require("header.php");
 
 <img src="../img/vp_banner.png" alt="Veebiprogrammeerimise kursuse bänner">
 <p> </p>
- <a href="http://greeny.cs.tlu.ee/~tanevol/vp/kodune3/page2.php">Uus mõte</a>
- <a href="http://greeny.cs.tlu.ee/~tanevol/vp/kodune3/page3.php">Varasemad mõtted</a>
+ 
+ <ul>
+	<li><a href="page2.php">Uus mõte</a></li>
+	<li><a href="page3.php">Varasemad mõtted</a></li>
+	<li><a href="listfilms.php">Filmiinfo näitamine</a></li>
+ </ul>
  
  <h1><?php echo $username; ?> programmeerib veebi</h1>
   <p>See veebileht on loodud õppetöö kaigus ning ei sisalda mingit tõsiseltvõetavat sisu!</p>
@@ -77,6 +81,7 @@ require("header.php");
 <p> Lehe avamise aeg: <?php echo $weekdaynameset[$weekdaynow-1].", ". $dayofmonth.". ". $monthnameset[$monthnow-1]." ". $year .", kell ".$time .", semestri algusest on möödunud " .$fromsemesterstartdays ." päeva"; ?>. </p>
 
 <p> Semestri lõpuni on <?php echo $fromsemesterenddays*-1 ?> päeva.</p>
+
 
 <p> Semester on <?php if($fromsemesterenddays < 0){
 	echo($semesteropen = "käimas. ");}

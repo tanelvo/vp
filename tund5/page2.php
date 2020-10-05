@@ -49,9 +49,14 @@ require("header.php");
 ?>
 
 <p> </p>
-<a href="http://greeny.cs.tlu.ee/~tanevol/vp/kodune3/page3.php">Varasemad mõtted</a>
-<a href="http://greeny.cs.tlu.ee/~tanevol/vp/kodune3/home.php">Kodulehele</a>
-<hr>
+<img src="../img/vp_banner.png" alt="Veebiprogrammeerimise kursuse bänner">
+
+ <ul>
+	<li><a href="home.php">Kodulehele</a></li>
+	<li><a href="page3.php">Varasemad mõtted</a></li>
+ </ul>
+
+</ul>
 <form method="POST">
   <label> Sisesta oma tänane mõttetu mõte:</label>
   <input type ="text" name="nonsens" placeholder="Mõttekoht">

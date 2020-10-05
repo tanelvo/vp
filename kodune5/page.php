@@ -1,5 +1,8 @@
 <?php
-$username = "Tanel Volkov";
+  require("../../../config.php");
+  require("fnc_common.php");
+  require("fnc_user.php");
+
 $time = date ("H:i:s");
 $hournow = date("H");
 $partofday = "lihtsalt aeg" ;
@@ -14,21 +17,41 @@ $weekdaynow = date("N");
 //echo $weekdaynow;
 $monthnow = date("m");
 
-if($hournow < 6){
-	$partofday = "uneaeg";
-}
-if($hournow >= 7 and $hournow < 8) {
-	$partofday = "Hommikuste protseduuride aeg";
-}
-if($hournow >= 8 and $hournow < 16) {
-	$partofday = "Õppimise aeg";
-}
-if($hournow >= 16 and $hournow < 21) {
-	$partofday = "Töövahetus";
-}
-if($hournow >= 21 and $hournow < 0) {
-	$partofday = "Vaba aeg";
-}
+$email="";
+$emailerror="";
+$passworderror="";
+$notice="";
+$formerror = null;
+$emailerror = null;
+$pwderror = null;
+
+  if(isset($_POST["usersubmit"])) {
+	  if(empty($_POST["emailinput"])) {
+        $emailerror = "Kasutajatunnus on sisestamata!";
+      }
+    else {
+      $email = filter_var(test_input($_POST["emailinput"]), FILTER_VALIDATE_EMAIL);
+    }
+	  
+	  if(empty($_POST["passwordinput"])) {
+        $pwderror = "Salasõna on sisestamata!";
+      }
+      if(!empty($_POST["passwordinput"]) and strlen($_POST["passwordinput"]) < 8) {
+        $pwderror = "Liiga lühike salasõna! (" . strlen($_POST["passwordinput"]) . " märki 8 asemel)";
+      }
+
+    if(empty($emailerror) and empty($pwderror)) {
+      $result = signin($email, $_POST["passwordinput"]);
+      // if($result == "OK") {
+      //   $notice = "Sisse logimine õnnestus!";
+      //   $email = "";
+      // }
+      // else {
+        $formerror = $result;
+      // }
+  
+    }
+  }
 
 //jälgime semestri kulgu
 $semesterstart = new DateTime("2020-8-31");
@@ -67,23 +90,32 @@ require("header.php");
 
 <img src="../img/vp_banner.png" alt="Veebiprogrammeerimise kursuse bänner">
 <p> </p>
- <a href="http://greeny.cs.tlu.ee/~tanevol/vp/kodune3/page2.php">Uus mõte</a>
- <a href="http://greeny.cs.tlu.ee/~tanevol/vp/kodune3/page3.php">Varasemad mõtted</a>
  
- <h1><?php echo $username; ?> programmeerib veebi</h1>
-  <p>See veebileht on loodud õppetöö kaigus ning ei sisalda mingit tõsiseltvõetavat sisu!</p>
+ 
+ <h1>Sisse logimine</h1>
+<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+	<label for="emailinput">Kasutajatunnus (email): </label><br>
+	<input type="email" name="emailinput" id="emailinput" placeholder="Email" value="<?php echo $email; ?>"><span><?php echo $emailerror . "<br />"; ?></span>
+	<label for="passwordinput">Salasõna: </label><br>
+	<input type="password" name="passwordinput" id="passwordinput" placeholder="*****"><span><?php echo $pwderror . "<br />"; ?></span>
+	<span><?php echo $formerror . "<br />"; ?></span>
+	<input type="submit" name="usersubmit" value="Logi sisse">
+</form>
+  <ul>
+	<li><a href="addnewuser.php">Konto loomine</a></li>
+ </ul>
+  <p>See veebileht on loodud õppetöö käigus ning ei sisalda mingit tõsiseltvõetavat sisu!</p>
   <p>Leht on loodud veebiprogrammeerimise kursusel <a href="http://www.tlu.ee">Tallinna ülikooli</a> Digitehnoloogiate instituudis.</p>
   
 <p> Lehe avamise aeg: <?php echo $weekdaynameset[$weekdaynow-1].", ". $dayofmonth.". ". $monthnameset[$monthnow-1]." ". $year .", kell ".$time .", semestri algusest on möödunud " .$fromsemesterstartdays ." päeva"; ?>. </p>
 
 <p> Semestri lõpuni on <?php echo $fromsemesterenddays*-1 ?> päeva.</p>
 
+
 <p> Semester on <?php if($fromsemesterenddays < 0){
 	echo($semesteropen = "käimas. ");}
 	else {echo("läbi. ");}	
 	echo number_format($semesterprocent, 1);?>% semestrist on läbitud. </p>
-	
-<p><?php echo "Parajasti on " .$partofday. "."; ?> </p>
 
 <img src="<?php echo $dir."/".$random_img ?>">
 

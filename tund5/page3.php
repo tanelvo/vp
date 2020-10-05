@@ -45,18 +45,18 @@ $partofday = "lihtsalt aeg" ;
 //vaatame, mida vormist severile saadetakse
 var_dump($_POST);
 
+
 require("header.php");
 ?>
 
-<p> </p>
-<a href="http://greeny.cs.tlu.ee/~tanevol/vp/kodune3/page3.php">Varasemad mõtted</a>
-<a href="http://greeny.cs.tlu.ee/~tanevol/vp/kodune3/home.php">Kodulehele</a>
-<hr>
-<form method="POST">
-  <label> Sisesta oma tänane mõttetu mõte:</label>
-  <input type ="text" name="nonsens" placeholder="Mõttekoht">
-  <input type="submit" value="Saada ära!" name="submitnonsens">
-  
-</form>
+<p></p>
+<img src="../img/vp_banner.png" alt="Veebiprogrammeerimise kursuse bänner">
+
+<ul>
+	<li><a href="home.php">Kodulehele</a></li>
+	<li><a href="page2.php">Uus mõte</a></li>
+</ul>
+
+<hr> <?php echo $nonsenshtml; ?>
 </body>
 </html>
